@@ -499,7 +499,7 @@ async function carregarRelatorio() {
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 60000);
-    const r = await fetch(`https://seguroclaro-server-production.up.railway.app/api/reports/${periodoActual}`, { signal: controller.signal });
+    const r = await fetch(`https://seguro-claro-pap.onrender.com/api/reports/${periodoActual}`, { signal: controller.signal });
     clearTimeout(timeoutId);
     const dados = await r.json();
     renderKPIs(dados.totais, dados);
@@ -726,7 +726,7 @@ async function carregarSimulacoes(pagina) {
   const inicio = document.getElementById('filtro-inicio')?.value || '';
   const fim    = document.getElementById('filtro-fim')?.value || '';
  
-  let url = `https://seguroclaro-server-production.up.railway.app/api/reports/simulacoes?pagina=${pagina}&limite=20`;
+  let url = `https://seguro-claro-pap.onrender.com/api/reports/simulacoes?pagina=${pagina}&limite=20`;
   if (ramo)   url += `&ramo=${ramo}`;
   if (inicio) url += `&inicio=${inicio}`;
   if (fim)    url += `&fim=${fim}`;
@@ -810,7 +810,7 @@ async function reiniciarEstatisticas() {
   const ok = await scConfirm('Tens a certeza que queres apagar todas as estatísticas? Esta ação é irreversível.', 'Reiniciar estatísticas');
   if (!ok) return;
   try {
-    const r = await fetch('https://seguroclaro-server-production.up.railway.app/api/reports/estatisticas', { method: 'DELETE' });
+    const r = await fetch('https://seguro-claro-pap.onrender.com/api/reports/estatisticas', { method: 'DELETE' });
     const d = await r.json();
     if (d.sucesso) {
       await scAlert('Estatísticas reiniciadas com sucesso.', 'Concluído');
@@ -829,7 +829,7 @@ async function apagarSelecionadas() {
   const ok = await scConfirm(`Tens a certeza que queres apagar ${ids.length} simulação(ões)? Esta ação é irreversível.`, 'Apagar simulações');
   if (!ok) return;
   try {
-    const r = await fetch('https://seguroclaro-server-production.up.railway.app/api/reports/simulacoes', {
+    const r = await fetch('https://seguro-claro-pap.onrender.com/api/reports/simulacoes', {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ids })
@@ -859,7 +859,7 @@ async function exportarSimulacoesPDF() {
     const inicio = document.getElementById('filtro-inicio')?.value || '';
     const fim    = document.getElementById('filtro-fim')?.value || '';
 
-    let url = `https://seguroclaro-server-production.up.railway.app/api/reports/simulacoes?pagina=1&limite=1000`;
+    let url = `https://seguro-claro-pap.onrender.com/api/reports/simulacoes?pagina=1&limite=1000`;
     if (ramo)   url += `&ramo=${ramo}`;
     if (inicio) url += `&inicio=${inicio}`;
     if (fim)    url += `&fim=${fim}`;
@@ -1106,7 +1106,7 @@ async function abrirDetalhe(id) {
   document.getElementById('modal').classList.add('open');
  
   try {
-    const r = await fetch(`https://seguroclaro-server-production.up.railway.app/api/reports/simulacao/${id}`);
+    const r = await fetch(`https://seguro-claro-pap.onrender.com/api/reports/simulacao/${id}`);
     const s = await r.json();
     document.getElementById('modal-body').innerHTML = renderDetalheModal(s);
   } catch(e) {
@@ -1285,7 +1285,7 @@ function pct(v, total) { return total > 0 ? ((v/total)*100).toFixed(1) : '0.0'; 
 // ═══════════════════════════════════════════════════════
 async function exportarSimulacaoPDF(id) {
   try {
-    const r = await fetch(`https://seguroclaro-server-production.up.railway.app/api/reports/simulacao/${id}`);
+    const r = await fetch(`https://seguro-claro-pap.onrender.com/api/reports/simulacao/${id}`);
     const s = await r.json();
     const d = s.detalhes || {};
     const { jsPDF } = window.jspdf;
@@ -1843,12 +1843,12 @@ async function exportarComparacaoPDF() {
 carregarRelatorio();
 
 // Mantém o servidor acordado com um ping a cada 10 minutos
-setInterval(() => fetch('https://seguroclaro-server-production.up.railway.app/api/reports/hoje').catch(()=>{}), 10 * 60 * 1000);
+setInterval(() => fetch('https://seguro-claro-pap.onrender.com/api/reports/hoje').catch(()=>{}), 10 * 60 * 1000);
 
 // ═══════════════════════════════════════════════════════
 // DEFINIÇÕES — Notificações por Email
 // ═══════════════════════════════════════════════════════
-const SERVER = 'https://seguroclaro-server-production.up.railway.app';
+const SERVER = 'https://seguro-claro-pap.onrender.com';
 
 async function carregarDefinicoes() {
   await carregarNotifEmail();
