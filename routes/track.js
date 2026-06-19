@@ -2,7 +2,6 @@
 const express  = require('express');
 const router   = express.Router();
 const db       = require('../database');
-const { notificarNovaSimulacao } = require('../notifier');
 
 function agora() {
   const n = new Date();
@@ -96,14 +95,6 @@ router.post('/simulacao', async (req, res) => {
          dados.faixas_etarias?JSON.stringify(dados.faixas_etarias):null,
          dados.coberturas?JSON.stringify(dados.coberturas):null,
          dados.email||null, dados.telemovel||null]);
-    } else if (ramo === 'mrc') {
-      await run(`INSERT INTO sim_mrc (sim_id,nome,nif,email,telemovel,morada,cp,ano_construcao,n_fraccoes,area_total,valor_edificio,valor_rc_partes_comuns,coberturas) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-        [simId, dados.nome||null, dados.nif||null, dados.email||null, dados.telemovel||null,
-         dados.morada||null, dados.cp||null, dados.ano_construcao?parseInt(dados.ano_construcao):null,
-         dados.n_fraccoes?parseInt(dados.n_fraccoes):null, dados.area_total?parseFloat(dados.area_total):null,
-         dados.valor_edificio?parseFloat(dados.valor_edificio):null,
-         dados.valor_rc_partes_comuns?parseFloat(dados.valor_rc_partes_comuns):null,
-         dados.coberturas?JSON.stringify(dados.coberturas):null]);
     } else if (ramo === 'mre') {
       await run(`INSERT INTO sim_mre (sim_id,nome_empresa,nif,email,telemovel,cae,n_trabalhadores,morada,cp,ano_construcao,area_imovel,materiais_estrutura,materiais_cobertura,dist_agua_km,zona_arborizada,tempo_bombeiros_min,protecao_incendio,protecao_intrusion,valor_imovel,valor_recheio,coberturas_imovel,coberturas_recheio) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
         [simId, dados.nome_empresa||null, dados.nif||null, dados.email||null, dados.telemovel||null,
@@ -130,17 +121,9 @@ router.post('/simulacao', async (req, res) => {
       saude:          'sim_saude',
       vida_credito:   'sim_vida_credito',
       saude_empresas: 'sim_saude_empresas',
-      mrc:            'sim_mrc',
       mre:            'sim_mre',
     };
     if (mapa[ramo]) await incrementar(data, mapa[ramo]);
-
-    // ── NOTIFICAÇÃO POR EMAIL ─────────────────────────────────────────────────
-    notificarNovaSimulacao({
-      ramo, nome: dados.nome || dados.nome_empresa,
-      melhor_seg: melhor_seguradora, melhor_preco: melhor_preco,
-      sim_id: simId, email_cliente: dados.email
-    }).catch(() => {});
 
     res.json({ ok: true, id: simId });
   } catch(e) { res.status(500).json({ erro: e.message }); }
