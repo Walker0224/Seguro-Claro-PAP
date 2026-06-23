@@ -527,26 +527,34 @@ function renderKPIs(t, dados) {
   const totalCliques = (t.cliques_auto||0)+(t.cliques_habitacao||0)+(t.cliques_vida||0)+(t.cliques_saude||0);
   const taxaConv = totalCliques > 0 ? ((totalSims/totalCliques)*100).toFixed(1) : '0.0';
 
-  // Média de visitas por dia (só faz sentido em períodos com mais de 1 dia)
+  // Número de dias com actividade para calcular médias
   const diasComVisitas = (dados.dias || []).filter(d => (d.total_visitas||0) > 0);
   const nDias = diasComVisitas.length || 1;
-  const mediaVisitas = (t.total_visitas / nDias).toFixed(1);
-  const subVisitas = periodoActual === 'hoje'
-    ? '&nbsp;'
-    : `Média diária: ${mediaVisitas}`;
+  const isHoje = periodoActual === 'hoje';
+
+  // Médias diárias
+  const mediaVisitas  = (t.total_visitas / nDias).toFixed(1);
+  const mediaSims     = (totalSims / nDias).toFixed(1);
+  const mediaCliques  = (totalCliques / nDias).toFixed(1);
+  const mediaAuto     = ((t.sim_auto||0) / nDias).toFixed(1);
+  const mediaHab      = ((t.sim_habitacao||0) / nDias).toFixed(1);
+  const mediaVida     = ((t.sim_vida||0) / nDias).toFixed(1);
+  const mediaSaude    = ((t.sim_saude||0) / nDias).toFixed(1);
+
+  const sub = (media, hojeTexto) => isHoje ? hojeTexto : `Média diária: ${media}`;
 
   document.getElementById('kpi-grid').innerHTML = `
     <div class="kpi" style="--c:#3b82f6">
       
       <div class="kpi-label">Visitas Totais</div>
       <div class="kpi-val">${fmt(t.total_visitas)}</div>
-      <div class="kpi-sub">${subVisitas}</div>
+      <div class="kpi-sub">${sub(mediaVisitas, 'Visitas ao site hoje')}</div>
     </div>
     <div class="kpi" style="--c:#10b981">
       
       <div class="kpi-label">Simulações</div>
       <div class="kpi-val">${fmt(totalSims)}</div>
-      <div class="kpi-sub">Taxa conversão: ${taxaConv}%</div>
+      <div class="kpi-sub">${sub(mediaSims, 'Taxa conversão: ' + taxaConv + '%')}</div>
     </div>
     <div class="kpi" style="--c:#f59e0b">
       
@@ -558,25 +566,25 @@ function renderKPIs(t, dados) {
       
       <div class="kpi-label">Sim. Automóvel</div>
       <div class="kpi-val">${fmt(t.sim_auto)}</div>
-      <div class="kpi-sub">${pct(t.sim_auto, totalSims)}% do total</div>
+      <div class="kpi-sub">${sub(mediaAuto, 'Pedidos de seguro auto')}</div>
     </div>
     <div class="kpi" style="--c:#92400e">
       
       <div class="kpi-label">Sim. Habitação</div>
       <div class="kpi-val">${fmt(t.sim_habitacao)}</div>
-      <div class="kpi-sub">${pct(t.sim_habitacao, totalSims)}% do total</div>
+      <div class="kpi-sub">${sub(mediaHab, 'Pedidos de seguro habitação')}</div>
     </div>
     <div class="kpi" style="--c:#10b981">
       
       <div class="kpi-label">Sim. Vida</div>
       <div class="kpi-val">${fmt(t.sim_vida)}</div>
-      <div class="kpi-sub">${pct(t.sim_vida, totalSims)}% do total</div>
+      <div class="kpi-sub">${sub(mediaVida, 'Pedidos de seguro vida')}</div>
     </div>
     <div class="kpi" style="--c:#ef4444">
       
       <div class="kpi-label">Sim. Saúde</div>
       <div class="kpi-val">${fmt(t.sim_saude)}</div>
-      <div class="kpi-sub">${pct(t.sim_saude, totalSims)}% do total</div>
+      <div class="kpi-sub">${sub(mediaSaude, 'Pedidos de seguro saúde')}</div>
     </div>
   `;
 }
