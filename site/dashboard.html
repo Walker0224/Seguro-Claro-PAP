@@ -291,96 +291,154 @@ body.tab-definicoes #vista-definicoes{display:block}
 
   <!-- ═══════════════ VISTA DEFINIÇÕES ═══════════════ -->
   <div id="vista-definicoes">
-    <div style="max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:16px">
+
+    <!-- Linha 1: Notificações + Email Seguradora -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px">
 
       <!-- Card 1: Notificações por Email -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px 30px">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
-          <div style="width:36px;height:36px;background:#3b82f6;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:#fff;flex-shrink:0">✉</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="width:34px;height:34px;background:#3b82f6;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;flex-shrink:0">✉</div>
           <div>
-            <div style="font-size:.9rem;font-weight:800;color:var(--text)">Notificações por Email</div>
-            <div style="font-size:.72rem;color:var(--muted)">Recebe um email automático sempre que chega uma nova simulação</div>
+            <div style="font-size:.88rem;font-weight:800;color:var(--text)">Notificações por Email</div>
+            <div style="font-size:.7rem;color:var(--muted)">Email automático em cada nova simulação</div>
           </div>
         </div>
-        <hr style="border:none;border-top:1px solid var(--border);margin:18px 0"/>
+        <hr style="border:none;border-top:1px solid var(--border);margin:14px 0"/>
+        <div style="margin-bottom:12px">
+          <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:5px">Email fixo (sempre notificado)</div>
+          <div style="background:#f0f4f9;border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-size:.82rem;color:var(--text2);font-family:'DM Mono',monospace">pja.teixeira@jotosegur.pt</div>
+        </div>
         <div style="margin-bottom:16px">
-          <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:6px">Email fixo (sempre notificado)</div>
-          <div style="background:#f0f4f9;border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.85rem;color:var(--text2);font-family:'DM Mono',monospace">pja.teixeira@jotosegur.pt</div>
-        </div>
-        <div style="margin-bottom:20px">
-          <label style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:6px">Email adicional (opcional)</label>
+          <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:5px">Email adicional (opcional)</label>
           <input id="notif-email-input" type="email" placeholder="outro@email.com"
-            style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.88rem;font-family:inherit;outline:none;transition:.15s"
+            style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:.85rem;font-family:inherit;outline:none;transition:.15s"
             onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"/>
-          <div style="font-size:.7rem;color:var(--muted);margin-top:5px">Se preenchido, este email também recebe as notificações. Deixa vazio para desativar.</div>
+          <div style="font-size:.68rem;color:var(--muted);margin-top:4px">Deixa vazio para desativar o email adicional.</div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-          <button onclick="guardarNotifEmail()" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-            Guardar
-          </button>
-          <button onclick="testarEmailNotif()" style="background:var(--bg);color:var(--text2);border:1.5px solid var(--border);border-radius:8px;padding:10px 20px;font-size:.82rem;font-weight:600;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
-            📧 Enviar email de teste
-          </button>
-          <div id="notif-status" style="font-size:.78rem;color:var(--muted)"></div>
+        <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <button onclick="guardarNotifEmail()" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.8rem;font-weight:700;cursor:pointer;transition:.15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Guardar</button>
+          <button onclick="testarEmailNotif()" style="background:var(--bg);color:var(--text2);border:1.5px solid var(--border);border-radius:8px;padding:9px 16px;font-size:.8rem;font-weight:600;cursor:pointer;transition:.15s" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">📧 Testar</button>
+          <div id="notif-status" style="font-size:.75rem;color:var(--muted)"></div>
         </div>
       </div>
 
       <!-- Card 2: Email da Seguradora -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px 30px">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
-          <div style="width:36px;height:36px;background:#10b981;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:#fff;flex-shrink:0">📋</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="width:34px;height:34px;background:#10b981;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;flex-shrink:0">📋</div>
           <div>
-            <div style="font-size:.9rem;font-weight:800;color:var(--text)">Email da Seguradora</div>
-            <div style="font-size:.72rem;color:var(--muted)">Email que recebe os resultados completos de cada simulação do cliente</div>
+            <div style="font-size:.88rem;font-weight:800;color:var(--text)">Email da Seguradora</div>
+            <div style="font-size:.7rem;color:var(--muted)">Recebe o PDF completo de cada simulação</div>
           </div>
         </div>
-        <hr style="border:none;border-top:1px solid var(--border);margin:18px 0"/>
-        <div style="margin-bottom:20px">
-          <label style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:6px">Email da Seguradora</label>
+        <hr style="border:none;border-top:1px solid var(--border);margin:14px 0"/>
+        <div style="margin-bottom:16px">
+          <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:5px">Email da Seguradora</label>
           <input id="email-seg-input" type="email" placeholder="seguradora@email.com"
-            style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 14px;font-size:.88rem;font-family:inherit;outline:none;transition:.15s"
+            style="width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:.85rem;font-family:inherit;outline:none;transition:.15s"
             onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'"/>
-          <div style="font-size:.7rem;color:var(--muted);margin-top:5px">Se vazio, usa o email fixo por defeito. Este email recebe o PDF completo de cada simulação.</div>
+          <div style="font-size:.68rem;color:var(--muted);margin-top:4px">Se vazio, usa o email fixo por defeito.</div>
         </div>
-        <div style="display:flex;align-items:center;gap:10px">
-          <button onclick="guardarEmailSeg()" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:.82rem;font-weight:700;cursor:pointer;transition:.15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-            Guardar
-          </button>
-          <div id="seg-email-status" style="font-size:.78rem;color:var(--muted)"></div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <button onclick="guardarEmailSeg()" style="background:var(--primary);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.8rem;font-weight:700;cursor:pointer;transition:.15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Guardar</button>
+          <div id="seg-email-status" style="font-size:.75rem;color:var(--muted)"></div>
         </div>
       </div>
 
+    </div>
+
+    <!-- Linha 2: Sistema + Dados & Privacidade -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
       <!-- Card 3: Sistema -->
-      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:28px 30px">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
-          <div style="width:36px;height:36px;background:#6366f1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.9rem;color:#fff;flex-shrink:0">⚙</div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="width:34px;height:34px;background:#6366f1;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;flex-shrink:0">⚙</div>
           <div>
-            <div style="font-size:.9rem;font-weight:800;color:var(--text)">Sistema</div>
-            <div style="font-size:.72rem;color:var(--muted)">Informações e ligações rápidas</div>
+            <div style="font-size:.88rem;font-weight:800;color:var(--text)">Sistema</div>
+            <div style="font-size:.7rem;color:var(--muted)">Estado do servidor e ligações rápidas</div>
           </div>
         </div>
-        <hr style="border:none;border-top:1px solid var(--border);margin:18px 0"/>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
-          <div style="background:#f0f4f9;border-radius:8px;padding:12px 14px">
-            <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px">Versão</div>
-            <div style="font-size:.88rem;font-weight:600;color:var(--text)">SeguroClaro v2.1</div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:14px 0"/>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px">
+          <div style="background:#f0f4f9;border-radius:8px;padding:10px 12px">
+            <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:3px">Versão</div>
+            <div style="font-size:.85rem;font-weight:700;color:var(--text)">SeguroClaro v2.1</div>
           </div>
-          <div style="background:#f0f4f9;border-radius:8px;padding:12px 14px">
-            <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:4px">Servidor</div>
-            <div id="server-status-text" style="font-size:.88rem;font-weight:600;color:var(--muted)">A verificar...</div>
+          <div style="background:#f0f4f9;border-radius:8px;padding:10px 12px">
+            <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:3px">Servidor</div>
+            <div id="server-status-text" style="font-size:.85rem;font-weight:700;color:var(--muted)">A verificar...</div>
+          </div>
+          <div style="background:#f0f4f9;border-radius:8px;padding:10px 12px">
+            <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:3px">Base de Dados</div>
+            <div style="font-size:.85rem;font-weight:700;color:var(--text)">PostgreSQL</div>
+          </div>
+          <div style="background:#f0f4f9;border-radius:8px;padding:10px 12px">
+            <div style="font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:3px">Fuso Horário</div>
+            <div style="font-size:.85rem;font-weight:700;color:var(--text)">Europe/Lisbon</div>
           </div>
         </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
           <a href="https://seguroclaro.walker-31994.workers.dev/seguro%20final.html" target="_blank"
-            style="padding:9px 18px;background:var(--primary);color:#fff;border-radius:8px;font-size:.78rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:6px">
+            style="padding:8px 16px;background:var(--primary);color:#fff;border-radius:8px;font-size:.78rem;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:5px">
             🌐 Abrir Site
           </a>
-          <button onclick="verificarServidor()" style="padding:9px 18px;background:var(--bg);color:var(--text2);border:1.5px solid var(--border);border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer">
-            🔄 Verificar servidor
+          <button onclick="verificarServidor()" style="padding:8px 16px;background:var(--bg);color:var(--text2);border:1.5px solid var(--border);border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer">
+            🔄 Verificar Servidor
           </button>
-          <button onclick="reiniciarEstatisticasDefinicoes()" style="padding:9px 18px;background:#fee2e2;color:#dc2626;border:1.5px solid #fca5a5;border-radius:8px;font-size:.78rem;font-weight:700;cursor:pointer;margin-left:auto">
-            🗑️ Reiniciar Estatísticas
-          </button>
+        </div>
+      </div>
+
+      <!-- Card 4: Dados & Manutenção -->
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:22px 24px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="width:34px;height:34px;background:#f59e0b;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;flex-shrink:0">🗄</div>
+          <div>
+            <div style="font-size:.88rem;font-weight:800;color:var(--text)">Dados & Manutenção</div>
+            <div style="font-size:.7rem;color:var(--muted)">Gestão de dados e operações administrativas</div>
+          </div>
+        </div>
+        <hr style="border:none;border-top:1px solid var(--border);margin:14px 0"/>
+
+        <div style="display:flex;flex-direction:column;gap:10px">
+
+          <!-- Exportar todas as simulações -->
+          <div style="background:#f0f4f9;border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div>
+              <div style="font-size:.8rem;font-weight:700;color:var(--text)">Exportar Simulações</div>
+              <div style="font-size:.68rem;color:var(--muted);margin-top:2px">Descarrega todas as simulações em PDF</div>
+            </div>
+            <button onclick="setTab('simulacoes', document.querySelectorAll('.nav-tab')[1]); setTimeout(()=>exportarSimulacoesPDF(),400)"
+              style="padding:7px 14px;background:var(--primary);color:#fff;border:none;border-radius:7px;font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap">
+              📄 Exportar PDF
+            </button>
+          </div>
+
+          <!-- Ver todas as simulações -->
+          <div style="background:#f0f4f9;border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div>
+              <div style="font-size:.8rem;font-weight:700;color:var(--text)">Ver Simulações</div>
+              <div style="font-size:.68rem;color:var(--muted);margin-top:2px">Acede ao histórico completo de simulações</div>
+            </div>
+            <button onclick="setTab('simulacoes', document.querySelectorAll('.nav-tab')[1])"
+              style="padding:7px 14px;background:var(--bg);color:var(--text2);border:1.5px solid var(--border);border-radius:7px;font-size:.75rem;font-weight:600;cursor:pointer;white-space:nowrap">
+              📊 Ver Tabela
+            </button>
+          </div>
+
+          <!-- Reiniciar estatísticas -->
+          <div style="background:#fff5f5;border:1px solid #fecaca;border-radius:10px;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:10px">
+            <div>
+              <div style="font-size:.8rem;font-weight:700;color:#dc2626">Reiniciar Estatísticas</div>
+              <div style="font-size:.68rem;color:#ef4444;margin-top:2px">Apaga todos os dados do resumo diário. Irreversível.</div>
+            </div>
+            <button onclick="reiniciarEstatisticasDefinicoes()"
+              style="padding:7px 14px;background:#fee2e2;color:#dc2626;border:1.5px solid #fca5a5;border-radius:7px;font-size:.75rem;font-weight:700;cursor:pointer;white-space:nowrap">
+              🗑️ Reiniciar
+            </button>
+          </div>
+
         </div>
       </div>
 
