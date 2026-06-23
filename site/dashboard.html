@@ -527,17 +527,20 @@ function renderKPIs(t, dados) {
   const totalCliques = (t.cliques_auto||0)+(t.cliques_habitacao||0)+(t.cliques_vida||0)+(t.cliques_saude||0);
   const taxaConv = totalCliques > 0 ? ((totalSims/totalCliques)*100).toFixed(1) : '0.0';
 
-  // Média de visitas por dia (considera apenas dias com pelo menos 1 visita)
+  // Média de visitas por dia (só faz sentido em períodos com mais de 1 dia)
   const diasComVisitas = (dados.dias || []).filter(d => (d.total_visitas||0) > 0);
   const nDias = diasComVisitas.length || 1;
   const mediaVisitas = (t.total_visitas / nDias).toFixed(1);
+  const subVisitas = periodoActual === 'hoje'
+    ? '&nbsp;'
+    : `Média diária: ${mediaVisitas}`;
 
   document.getElementById('kpi-grid').innerHTML = `
     <div class="kpi" style="--c:#3b82f6">
       
       <div class="kpi-label">Visitas Totais</div>
       <div class="kpi-val">${fmt(t.total_visitas)}</div>
-      <div class="kpi-sub">Média por dia: ${mediaVisitas}</div>
+      <div class="kpi-sub">${subVisitas}</div>
     </div>
     <div class="kpi" style="--c:#10b981">
       
