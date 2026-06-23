@@ -239,9 +239,9 @@ body.tab-definicoes #vista-definicoes{display:block}
         <table>
           <thead>
             <tr>
-              <th>Data</th><th>Visitas</th><th>Únicos</th>
-              <th>Automóvel</th><th>Habitação</th><th>Vida</th><th>Saúde</th>
-              <th>Sim. Total</th>
+              <th>Data</th><th style="text-align:center">Visitas</th>
+              <th style="text-align:center">Automóvel</th><th style="text-align:center">Habitação</th><th style="text-align:center">Vida</th><th style="text-align:center">Saúde</th>
+              <th style="text-align:center">Sim. Total</th>
             </tr>
           </thead>
           <tbody id="tabela-dias-body"></tbody>
@@ -711,13 +711,12 @@ function renderTabelaDias(dados) {
     const sims = (d.sim_auto||0)+(d.sim_habitacao||0)+(d.sim_vida||0)+(d.sim_saude||0);
     return `<tr>
       <td><strong>${d.data}</strong></td>
-      <td>${d.total_visitas||0}</td>
-      <td>${d.visitantes_unicos||0}</td>
-      <td>${d.sim_auto||0}</td>
-      <td>${d.sim_habitacao||0}</td>
-      <td>${d.sim_vida||0}</td>
-      <td>${d.sim_saude||0}</td>
-      <td><strong>${sims}</strong></td>
+      <td style="text-align:center">${d.total_visitas||0}</td>
+      <td style="text-align:center">${d.sim_auto||0}</td>
+      <td style="text-align:center">${d.sim_habitacao||0}</td>
+      <td style="text-align:center">${d.sim_vida||0}</td>
+      <td style="text-align:center">${d.sim_saude||0}</td>
+      <td style="text-align:center"><strong>${sims}</strong></td>
     </tr>`;
   }).join('');
 }
