@@ -26,10 +26,20 @@ router.post('/visita', async (req, res) => {
     const { sessao_id, dispositivo } = req.body;
     if (!sessao_id) return res.status(400).json({ erro: 'sessao_id obrigatorio' });
     const { data, hora, ts } = agora();
+
+    // Verificar se este sessao_id já visitou hoje
+    const jaVisitouHoje = await get(`SELECT id FROM visitas WHERE sessao_id = ? AND data = ? LIMIT 1`, [sessao_id, data]);
+
+    // Inserir registo de visita (para histórico completo)
     await run(`INSERT INTO visitas (sessao_id, data, hora, timestamp, dispositivo) VALUES (?,?,?,?,?)`, [sessao_id, data, hora, ts, dispositivo || 'desktop']);
-    await incrementar(data, 'total_visitas');
-    const row = await get(`SELECT COUNT(DISTINCT sessao_id) as n FROM visitas WHERE data = ?`, [data]);
-    await run(`UPDATE resumo_diario SET visitantes_unicos = ? WHERE data = ?`, [row.n, data]);
+
+    // Só incrementar contadores se for a primeira visita do dia desta sessão
+    if (!jaVisitouHoje) {
+      await incrementar(data, 'total_visitas');
+      const row = await get(`SELECT COUNT(DISTINCT sessao_id) as n FROM visitas WHERE data = ?`, [data]);
+      await run(`UPDATE resumo_diario SET visitantes_unicos = ? WHERE data = ?`, [row.n, data]);
+    }
+
     res.json({ ok: true });
   } catch(e) { res.status(500).json({ erro: e.message }); }
 });
