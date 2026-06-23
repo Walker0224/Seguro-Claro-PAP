@@ -121,6 +121,7 @@ router.post('/simulacao', async (req, res) => {
       saude:          'sim_saude',
       vida_credito:   'sim_vida_credito',
       saude_empresas: 'sim_saude_empresas',
+      mrc:            'sim_mrc',
       mre:            'sim_mre',
     };
     if (mapa[ramo]) await incrementar(data, mapa[ramo]);
