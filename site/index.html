@@ -2171,7 +2171,7 @@ let currentType='auto';
 let lastResults=null, lastResultsType=null, lastResultsNome=null, lastResultsData=null;
 
 // ── TRACKING GLOBAL ──────────────────────────────────────────────────
-const _TRACK_URL = 'https://seguroclaro-server-production.up.railway.app';
+const _TRACK_URL = 'https://seguro-claro-pap.onrender.com';
 function _getSessaoId() {
   let id = localStorage.getItem('sc_sessao_id');
   if (!id) { id = 'sc_' + Date.now() + '_' + Math.random().toString(36).slice(2,9); localStorage.setItem('sc_sessao_id', id); }
@@ -6598,7 +6598,7 @@ async function enviarEmailSimulacao(ramo, formSnapshot, results) {
 // ────────────────────────────────────────────────────────────────
 
 (function() {
-  const TRACKING_URL = 'https://seguroclaro-server-production.up.railway.app';
+  const TRACKING_URL = 'https://seguro-claro-pap.onrender.com';
 
   // ── SESSAO PERSISTENTE (mesmo utilizador = mesmo ID) ──────────────
   function getSessaoId() {
