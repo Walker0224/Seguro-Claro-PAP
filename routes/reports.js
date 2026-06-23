@@ -3,8 +3,8 @@ const express = require('express');
 const router  = express.Router();
 const db      = require('../database');
 
-function hoje()      { return new Date().toISOString().split('T')[0]; }
-function diasAtras(n){ return new Date(Date.now()-n*86400000).toISOString().split('T')[0]; }
+function hoje()      { return new Date().toLocaleDateString('sv-SE', { timeZone: 'Europe/Lisbon' }); }
+function diasAtras(n){ return new Date(Date.now()-n*86400000).toLocaleDateString('sv-SE', { timeZone: 'Europe/Lisbon' }); }
 
 function all(sql, params) {
   return new Promise((res, rej) => db.all(sql, params, (err, rows) => { if(err) rej(err); else res(rows); }));
