@@ -5,7 +5,10 @@ const db       = require('../database');
 
 function agora() {
   const n = new Date();
-  return { data: n.toISOString().split('T')[0], hora: n.toTimeString().split(' ')[0], ts: Math.floor(n.getTime()/1000) };
+  // Usar hora de Lisboa (respeita TZ=Europe/Lisbon definido no server.js)
+  const data = n.toLocaleDateString('sv-SE', { timeZone: 'Europe/Lisbon' }); // sv-SE devolve YYYY-MM-DD
+  const hora = n.toLocaleTimeString('pt-PT', { timeZone: 'Europe/Lisbon', hour12: false });
+  return { data, hora, ts: Math.floor(n.getTime()/1000) };
 }
 function run(sql, params) {
   return new Promise((res, rej) => db.run(sql, params, function(err) { if(err) rej(err); else res(this); }));
