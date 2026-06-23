@@ -6622,11 +6622,9 @@ async function enviarEmailSimulacao(ramo, formSnapshot, results) {
     } catch(e) {}
   }
 
-  // ── REGISTAR VISITA — só 1 vez por dia por pessoa ─────────────────
-  var hoje = new Date().toISOString().split('T')[0];
-  var ultimaVisita = localStorage.getItem('sc_ultima_visita');
-  if (ultimaVisita !== hoje) {
-    localStorage.setItem('sc_ultima_visita', hoje);
+  // ── REGISTAR VISITA — 1 vez por sessão do browser ────────────────
+  if (!sessionStorage.getItem('sc_visita_registada')) {
+    sessionStorage.setItem('sc_visita_registada', '1');
     enviar('visita', {
       dispositivo: /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
     });
