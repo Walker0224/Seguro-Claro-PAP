@@ -103,6 +103,10 @@ async function init() {
       `ALTER TABLE sim_auto ADD COLUMN IF NOT EXISTS email TEXT`,
       `ALTER TABLE sim_habitacao ADD COLUMN IF NOT EXISTS telemovel TEXT`,
       `ALTER TABLE sim_habitacao ADD COLUMN IF NOT EXISTS email TEXT`,
+      `ALTER TABLE sim_auto ADD COLUMN IF NOT EXISTS precos_seguradoras TEXT`,
+      `ALTER TABLE sim_habitacao ADD COLUMN IF NOT EXISTS precos_seguradoras TEXT`,
+      `ALTER TABLE sim_vida ADD COLUMN IF NOT EXISTS precos_seguradoras TEXT`,
+      `ALTER TABLE sim_saude ADD COLUMN IF NOT EXISTS precos_seguradoras TEXT`,
       // colunas novas no resumo_diario (para BDs já existentes)
       `ALTER TABLE resumo_diario ADD COLUMN IF NOT EXISTS cliques_vida_credito INTEGER DEFAULT 0`,
       `ALTER TABLE resumo_diario ADD COLUMN IF NOT EXISTS cliques_saude_empresas INTEGER DEFAULT 0`,
