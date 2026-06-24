@@ -1323,10 +1323,17 @@ function renderDetalheModal(s) {
 
 function renderPrecosModal(s) {
   const seguradoras = [];
-  const d = s.detalhes || {};
+  let d = s.detalhes || {};
+  // O servidor pode guardar detalhes como string JSON
+  if (typeof d === 'string') { try { d = JSON.parse(d); } catch(e) { d = {}; } }
 
-  // Fonte principal: precos_seguradoras guardados no momento da simulação
-  const precos = d.precos_seguradoras;
+  // precos_seguradoras pode estar em d directamente ou em d.dados
+  let precos = d.precos_seguradoras;
+  if (!precos && d.dados) {
+    let dados = d.dados;
+    if (typeof dados === 'string') { try { dados = JSON.parse(dados); } catch(e) { dados = {}; } }
+    precos = dados.precos_seguradoras;
+  }
   if (precos && Array.isArray(precos) && precos.length) {
     precos.forEach(function(p) {
       seguradoras.push({ nome: p.nome || p.name || '—', mensal: p.mensal || p.price || null, anual: p.anual || p.priceAnual || null });
