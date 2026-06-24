@@ -79,17 +79,17 @@ router.post('/simulacao', async (req, res) => {
 
     // ── RAMOS EXISTENTES ───────────────────────────────────────────────────────
     if (ramo === 'auto') {
-      await run(`INSERT INTO sim_auto (sim_id,nome,nif,nasc,carta,cp,profissao,telemovel,email,matricula,marca,modelo,versao,ano,cilindrada,combustivel,valor,importado,tipo_veiculo,cobertura,franquia,pagamento,sinistros,data_sinistro,extras) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-        [simId, dados.nome||null, dados.nif||null, dados.nasc||null, dados.carta||null, dados.cp||null, dados.profissao||null, dados.telemovel||null, dados.email||null, dados.matr||null, dados.marca||null, dados.modelo||null, dados.versao||null, dados.ano?parseInt(dados.ano):null, dados.cil||null, dados.combustivel||null, dados.valor?parseFloat(dados.valor):null, dados.importado||null, dados.veicTipo||null, dados.cobertura||null, dados.franquia||null, dados.pagamento||null, dados.sinistros||null, dados.dataSinistro||null, dados.extras?JSON.stringify(dados.extras):null]);
+      await run(`INSERT INTO sim_auto (sim_id,nome,nif,nasc,carta,cp,profissao,telemovel,email,matricula,marca,modelo,versao,ano,cilindrada,combustivel,valor,importado,tipo_veiculo,cobertura,franquia,pagamento,sinistros,data_sinistro,extras,precos_seguradoras) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        [simId, dados.nome||null, dados.nif||null, dados.nasc||null, dados.carta||null, dados.cp||null, dados.profissao||null, dados.telemovel||null, dados.email||null, dados.matr||null, dados.marca||null, dados.modelo||null, dados.versao||null, dados.ano?parseInt(dados.ano):null, dados.cil||null, dados.combustivel||null, dados.valor?parseFloat(dados.valor):null, dados.importado||null, dados.veicTipo||null, dados.cobertura||null, dados.franquia||null, dados.pagamento||null, dados.sinistros||null, dados.dataSinistro||null, dados.extras?JSON.stringify(dados.extras):null, dados.precos_seguradoras?JSON.stringify(dados.precos_seguradoras):null]);
     } else if (ramo === 'habitacao') {
-      await run(`INSERT INTO sim_habitacao (sim_id,nome,nif,cp,telemovel,email,ano_construcao,area,area_dep,tipo_imovel,construcao,wc,sismo,rc,furto,assistencia) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-        [simId, dados.nome||null, dados.nif||null, dados.cp||null, dados.telemovel||null, dados.email||null, dados.ano?parseInt(dados.ano):null, dados.area?parseFloat(dados.area):null, dados.areaDep?parseFloat(dados.areaDep):null, dados.tipo||null, dados.construcao||null, dados.wc||null, dados.sismo?1:0, dados.rc?1:0, dados.furto?1:0, dados.assist?1:0]);
+      await run(`INSERT INTO sim_habitacao (sim_id,nome,nif,cp,telemovel,email,ano_construcao,area,area_dep,tipo_imovel,construcao,wc,sismo,rc,furto,assistencia,precos_seguradoras) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        [simId, dados.nome||null, dados.nif||null, dados.cp||null, dados.telemovel||null, dados.email||null, dados.ano?parseInt(dados.ano):null, dados.area?parseFloat(dados.area):null, dados.areaDep?parseFloat(dados.areaDep):null, dados.tipo||null, dados.construcao||null, dados.wc||null, dados.sismo?1:0, dados.rc?1:0, dados.furto?1:0, dados.assist?1:0, dados.precos_seguradoras?JSON.stringify(dados.precos_seguradoras):null]);
     } else if (ramo === 'vida') {
-      await run(`INSERT INTO sim_vida (sim_id,capital,inicio,fim,meses,tipo_premio,risco,pessoas) VALUES (?,?,?,?,?,?,?,?)`,
-        [simId, dados.capital?parseFloat(dados.capital):null, dados.inicio||null, dados.fim||null, dados.meses?parseInt(dados.meses):null, dados.tipo_premio||null, dados.risco||null, dados.pessoas?JSON.stringify(dados.pessoas):null]);
+      await run(`INSERT INTO sim_vida (sim_id,capital,inicio,fim,meses,tipo_premio,risco,pessoas,precos_seguradoras) VALUES (?,?,?,?,?,?,?,?,?)`,
+        [simId, dados.capital?parseFloat(dados.capital):null, dados.inicio||null, dados.fim||null, dados.meses?parseInt(dados.meses):null, dados.tipo_premio||null, dados.risco||null, dados.pessoas?JSON.stringify(dados.pessoas):null, dados.precos_seguradoras?JSON.stringify(dados.precos_seguradoras):null]);
     } else if (ramo === 'saude') {
-      await run(`INSERT INTO sim_saude (sim_id,plano,doencas_pre,dental,saude_mental,maternidade,pessoas) VALUES (?,?,?,?,?,?,?)`,
-        [simId, dados.plano||null, dados.doencas?1:0, dados.dental?1:0, dados.mental?1:0, dados.maternidade?1:0, dados.pessoas?JSON.stringify(dados.pessoas):null]);
+      await run(`INSERT INTO sim_saude (sim_id,plano,doencas_pre,dental,saude_mental,maternidade,pessoas,precos_seguradoras) VALUES (?,?,?,?,?,?,?,?)`,
+        [simId, dados.plano||null, dados.doencas?1:0, dados.dental?1:0, dados.mental?1:0, dados.maternidade?1:0, dados.pessoas?JSON.stringify(dados.pessoas):null, dados.precos_seguradoras?JSON.stringify(dados.precos_seguradoras):null]);
 
     // ── NOVOS RAMOS ────────────────────────────────────────────────────────────
     } else if (ramo === 'vida_credito') {
