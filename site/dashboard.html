@@ -452,7 +452,7 @@ body.tab-definicoes #vista-definicoes{display:block}
   <div class="modal">
     <div class="modal-header">
       <h2 id="modal-title">Detalhe da Simulação</h2>
-      <button class="modal-close" onclick="fecharModal()"></button>
+      <button class="modal-close" onclick="fecharModal()">✕</button>
     </div>
     <div class="modal-body" id="modal-body"></div>
   </div>
@@ -1181,7 +1181,7 @@ async function abrirDetalhe(id) {
   try {
     const r = await fetch(`https://seguro-claro-pap.onrender.com/api/reports/simulacao/${id}`);
     const s = await r.json();
-    document.getElementById('modal-body').innerHTML = renderDetalheModal(s);
+    document.getElementById('modal-body').innerHTML = renderDetalheModal(s) + renderPrecosModal(s);
   } catch(e) {
     document.getElementById('modal-body').innerHTML = '<div class="empty">Erro ao carregar detalhes.</div>';
   }
@@ -1277,8 +1277,8 @@ function renderDetalheModal(s) {
           <div class="detail-grid">
             ${di('Nome', p.nome)}${di('NIF', p.nif)}
             ${di('Idade', p.idade)}${di('Profissão', p.prof)}
-            ${i===0 && p.telemovel ? di('Telemóvel', p.telemovel) : ''}
-            ${i===0 && p.email ? di('Email', p.email) : ''}
+            ${p.telemovel ? di('Telemóvel', p.telemovel) : ''}
+            ${p.email ? di('Email', p.email) : ''}
           </div>
         </div>`;
       });
@@ -1309,8 +1309,8 @@ function renderDetalheModal(s) {
             ${di('Idade', p.idade ? p.idade+' anos' : null)}
             ${di('Código Postal', p.cp)}
             ${p.af ? di('Afinidade', p.af) : ''}
-            ${i===0 && p.telemovel ? di('Telemóvel', p.telemovel) : ''}
-            ${i===0 && p.email ? di('Email', p.email) : ''}
+            ${p.telemovel ? di('Telemóvel', p.telemovel) : ''}
+            ${p.email ? di('Email', p.email) : ''}
           </div>
         </div>`;
       });
@@ -1319,6 +1319,49 @@ function renderDetalheModal(s) {
   }
  
   return html;
+}
+
+function renderPrecosModal(s) {
+  const seguradoras = [];
+  const d = s.detalhes || {};
+
+  // Fonte principal: precos_seguradoras guardados no momento da simulação
+  const precos = d.precos_seguradoras;
+  if (precos && Array.isArray(precos) && precos.length) {
+    precos.forEach(function(p) {
+      seguradoras.push({ nome: p.nome || p.name || '—', mensal: p.mensal || p.price || null, anual: p.anual || p.priceAnual || null });
+    });
+  } else if (s.resultados && Array.isArray(s.resultados)) {
+    s.resultados.forEach(function(res) {
+      seguradoras.push({ nome: res.name || res.nome || '—', mensal: res.price || res.premio_mensal || null, anual: res.priceAnual || res.premio_anual || null });
+    });
+  } else if (s.melhor_seguradora) {
+    seguradoras.push({ nome: s.melhor_seguradora, mensal: s.melhor_preco, anual: s.melhor_preco ? s.melhor_preco * 12 * 0.97 : null });
+  }
+
+  if (!seguradoras.length) return '';
+  seguradoras.sort((a,b) => (a.mensal||999)-(b.mensal||999));
+  return `<div class="detail-section">
+    <h4>Preços por Seguradora</h4>
+    <div style="overflow-x:auto">
+      <table style="width:100%;border-collapse:collapse">
+        <thead><tr>
+          <th style="text-align:left;padding:7px 10px;background:#f5f8fc;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)">Seguradora</th>
+          <th style="text-align:right;padding:7px 10px;background:#f5f8fc;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)">Mensal</th>
+          <th style="text-align:right;padding:7px 10px;background:#f5f8fc;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--border)">Anual</th>
+        </tr></thead>
+        <tbody>${seguradoras.map((sg,i) => `
+          <tr style="background:${i%2===0?'var(--surface)':'#f5f8fc'}">
+            <td style="padding:7px 10px;font-size:.8rem;font-weight:${sg.nome===s.melhor_seguradora?'700':'500'};color:${sg.nome===s.melhor_seguradora?'var(--accent)':'var(--text2)'};border-bottom:1px solid #f0f3f7">
+              ${sg.nome}${sg.nome===s.melhor_seguradora?' <span style="background:#eff6ff;color:#1d4ed8;padding:1px 7px;border-radius:4px;font-size:.65rem;font-weight:700;margin-left:4px">MELHOR</span>':''}
+            </td>
+            <td style="padding:7px 10px;text-align:right;font-size:.82rem;font-weight:700;color:var(--primary);border-bottom:1px solid #f0f3f7">${sg.mensal ? Number(sg.mensal).toFixed(2)+' €' : '—'}</td>
+            <td style="padding:7px 10px;text-align:right;font-size:.8rem;color:var(--muted);border-bottom:1px solid #f0f3f7">${sg.anual ? Number(sg.anual).toFixed(2)+' €' : (sg.mensal ? (Number(sg.mensal)*12*0.97).toFixed(2)+' € (est.)' : '—')}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
 }
  
 function di(label, val) {
