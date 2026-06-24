@@ -2177,12 +2177,13 @@ function _getSessaoId() {
   if (!id) { id = 'sc_' + Date.now() + '_' + Math.random().toString(36).slice(2,9); localStorage.setItem('sc_sessao_id', id); }
   return id;
 }
-function _trackSim(ramo, dados, melhorSeg, melhorPreco) {
+function _trackSim(ramo, dados, melhorSeg, melhorPreco, resultados) {
   try {
+    const precos = (resultados||[]).map(function(r){ return { nome: r.name||r.nome||'—', mensal: r.price||r.premio_mensal||null, anual: r.priceAnual||r.premio_anual||null }; });
     fetch(_TRACK_URL + '/api/track/simulacao', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessao_id: _getSessaoId(), ramo: ramo, dados: dados, melhor_seguradora: melhorSeg||null, melhor_preco: melhorPreco||null })
+      body: JSON.stringify({ sessao_id: _getSessaoId(), ramo: ramo, dados: Object.assign({}, dados, { precos_seguradoras: precos }), melhor_seguradora: melhorSeg||null, melhor_preco: melhorPreco||null })
     }).catch(function(){});
   } catch(e) {}
 }
@@ -4413,7 +4414,7 @@ function calcAuto(){
     });
     lastResults=results;lastResultsType='auto';lastResultsNome=nome;lastResultsData=formSnapshot;
     var _melhorAuto=results.slice().sort(function(a,b){return a.price-b.price;})[0];
-    _trackSim('auto',formSnapshot,_melhorAuto?_melhorAuto.name:null,_melhorAuto?_melhorAuto.price:null);
+    _trackSim('auto',formSnapshot,_melhorAuto?_melhorAuto.name:null,_melhorAuto?_melhorAuto.price:null,results);
     enviarEmailSimulacao('auto', formSnapshot, results);
     addHistoryEntry({type:'auto',nome,date:new Date().toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon' }),
       summary:v('a-marca')+' '+v('a-modelo')+' · '+v('a-matr')+' · '+v('a-cob'),
@@ -4471,7 +4472,7 @@ function calcHab(){
     });
     lastResults=results;lastResultsType='habitacao';lastResultsNome=nome;lastResultsData=formSnapshot;
     var _melhorHab=results.slice().sort(function(a,b){return a.price-b.price;})[0];
-    _trackSim('habitacao',formSnapshot,_melhorHab?_melhorHab.name:null,_melhorHab?_melhorHab.price:null);
+    _trackSim('habitacao',formSnapshot,_melhorHab?_melhorHab.name:null,_melhorHab?_melhorHab.price:null,results);
     enviarEmailSimulacao('habitacao', formSnapshot, results);
     addHistoryEntry({type:'habitacao',nome,date:new Date().toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon' }),summary:'Área: '+v('h-area')+' m² · '+v('h-tipo'),best:results.slice().sort((a,b)=>a.price-b.price)[0]});
     hideLoading();
@@ -4628,7 +4629,7 @@ function calcVida(){
     lastResults=results;lastResultsType='vida';lastResultsNome=nome;
     lastResultsData={nome,email:vidaPessoasData[0]?.email||'',telemovel:vidaPessoasData[0]?.telemovel||'',capital:v('v-capital'),inicio:v('v-inicio'),fim:v('v-fim'),meses,idades,pessoas:vidaPessoasData,tipo:vidaTipo,coberturas:vidaCoberturas,prazo:v('v-prazo'),taxa:v('v-taxa'),profissaoMaxClasse:profInfo.classe,profissaoFator:profInfo.fator};
     var _melhorVida=results.slice().sort(function(a,b){return a.price-b.price;})[0];
-    _trackSim('vida',lastResultsData,_melhorVida?_melhorVida.name:null,_melhorVida?_melhorVida.price:null);
+    _trackSim('vida',lastResultsData,_melhorVida?_melhorVida.name:null,_melhorVida?_melhorVida.price:null,results);
     enviarEmailSimulacao('vida', lastResultsData, results);
     addHistoryEntry({type:'vida',nome,date:new Date().toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon' }),summary:'Capital: '+v('v-capital')+' € · '+meses+' meses',best:results.slice().sort((a,b)=>a.price-b.price)[0]});
     hideLoading();
@@ -4741,7 +4742,8 @@ function calcSaude(){
       maternidade:document.getElementById('s-maternidade')?.checked,
     };
     var _melhorSaude=results.map(function(r){return {name:r.name,price:r.plans[0].price};}).sort(function(a,b){return a.price-b.price;})[0];
-    _trackSim('saude',lastResultsData,_melhorSaude?_melhorSaude.name:null,_melhorSaude?_melhorSaude.price:null);
+    var _resultadosSaude=results.map(function(r){var p=r.plans.find(function(pl){return pl.tipo===plano;})||r.plans[0];return {name:r.name,price:p.price};});
+    _trackSim('saude',lastResultsData,_melhorSaude?_melhorSaude.name:null,_melhorSaude?_melhorSaude.price:null,_resultadosSaude);
     enviarEmailSimulacao('saude', lastResultsData, results);
     addHistoryEntry({type:'saude',date:new Date().toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon' }),summary:idades.length+' pessoa(s) · Plano '+plano,best:results.map(r=>({name:r.name,price:r.plans[0].price})).sort((a,b)=>a.price-b.price)[0]});
     hideLoading();
