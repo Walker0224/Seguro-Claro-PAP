@@ -225,8 +225,9 @@ body {
   flex: 1; display: flex; align-items: center; gap: 10px;
   padding: 11px 14px; border-radius: 9px; transition: all .2s; cursor: default;
 }
-.wstep.done { background: rgba(30,111,191,.07); }
-.wstep.active { background: linear-gradient(135deg, var(--primary), var(--primary-2)); box-shadow: 0 4px 16px rgba(10,75,120,.22); }
+.wstep.done { background: rgba(30,111,191,.07); cursor: pointer; }
+.wstep.done:hover { background: rgba(30,111,191,.14); }
+.wstep.active { background: linear-gradient(135deg, var(--primary), var(--primary-2)); box-shadow: 0 4px 16px rgba(10,75,120,.22); cursor: pointer; }
 .wstep-num {
   width: 28px; height: 28px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
@@ -1022,7 +1023,7 @@ function goBack(){
 <!-- NAV -->
 <nav class="nav">
   <a class="nav-logo" href="#">
-    <div class="nav-logo-mark">SC</div>
+    <img src="data:image/png;base64,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" style="width:34px;height:34px;object-fit:contain" alt="SeguroClaro"/>
     <span class="nav-logo-text">SeguroClaro</span>
   </a>
   <div class="nav-right">
@@ -1189,10 +1190,7 @@ function goBack(){
           <input type="checkbox" class="termos-checkbox" id="termos-check-auto" style="width:16px;height:16px;cursor:pointer;accent-color:var(--accent)" onchange="onTermosCheck(this)"/>
           <span style="font-size:.78rem;color:var(--text2)">Li e aceito os termos de responsabilidade</span>
         </label>
-        <label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer">
-          <input type="checkbox" id="contacto-check-auto" class="contacto-checkbox" style="margin-top:2px;width:15px;height:15px;flex-shrink:0;accent-color:var(--accent);cursor:pointer" onchange="onContactoCheck(this)"/>
-          <span style="font-size:.78rem;color:var(--text2)">Autorizo o SeguroClaro a contactar-me por telefone ou e-mail com propostas personalizadas de seguros.</span>
-        </label>
+
       </div>
     </div>
     <div class="step-nav">
@@ -1619,10 +1617,7 @@ function goBack(){
           <input type="checkbox" class="termos-checkbox" id="termos-check-hab" style="width:16px;height:16px;cursor:pointer;accent-color:var(--accent)" onchange="onTermosCheck(this)"/>
           <span style="font-size:.78rem;color:var(--text2)">Li e aceito os termos de responsabilidade</span>
         </label>
-        <label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer">
-          <input type="checkbox" id="contacto-check-hab" class="contacto-checkbox" style="margin-top:2px;width:15px;height:15px;flex-shrink:0;accent-color:var(--accent);cursor:pointer" onchange="onContactoCheck(this)"/>
-          <span style="font-size:.78rem;color:var(--text2)">Autorizo o SeguroClaro a contactar-me por telefone ou e-mail com propostas personalizadas de seguros.</span>
-        </label>
+
       </div>
     </div>
     <div class="step-nav">
@@ -1877,10 +1872,7 @@ function goBack(){
           <input type="checkbox" class="termos-checkbox" id="termos-check-vida" style="width:16px;height:16px;cursor:pointer;accent-color:var(--accent)" onchange="onTermosCheck(this)"/>
           <span style="font-size:.78rem;color:var(--text2)">Li e aceito os termos de responsabilidade</span>
         </label>
-        <label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer">
-          <input type="checkbox" id="contacto-check-vida" class="contacto-checkbox" style="margin-top:2px;width:15px;height:15px;flex-shrink:0;accent-color:var(--accent);cursor:pointer" onchange="onContactoCheck(this)"/>
-          <span style="font-size:.78rem;color:var(--text2)">Autorizo o SeguroClaro a contactar-me por telefone ou e-mail com propostas personalizadas de seguros.</span>
-        </label>
+
       </div>
     </div>
     <div class="step-nav">
@@ -2038,10 +2030,7 @@ function goBack(){
           <input type="checkbox" class="termos-checkbox" id="termos-check-saude" style="width:16px;height:16px;cursor:pointer;accent-color:var(--accent)" onchange="onTermosCheck(this)"/>
           <span style="font-size:.78rem;color:var(--text2)">Li e aceito os termos de responsabilidade</span>
         </label>
-        <label style="display:flex;align-items:flex-start;gap:9px;cursor:pointer">
-          <input type="checkbox" id="contacto-check-saude" class="contacto-checkbox" style="margin-top:2px;width:15px;height:15px;flex-shrink:0;accent-color:var(--accent);cursor:pointer" onchange="onContactoCheck(this)"/>
-          <span style="font-size:.78rem;color:var(--text2)">Autorizo o SeguroClaro a contactar-me por telefone ou e-mail com propostas personalizadas de seguros.</span>
-        </label>
+
       </div>
     </div>
 
@@ -3969,12 +3958,25 @@ function _goStep(prefix, total, n) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// Navegação por clique nos passos do wizard
+document.addEventListener('click', function(e) {
+  const ws = e.target.closest('.wstep');
+  if (!ws || (!ws.classList.contains('done') && !ws.classList.contains('active'))) return;
+  const id = ws.id; // e.g. "hab-ws2"
+  const match = id.match(/^(.+)-ws(\d+)$/);
+  if (!match) return;
+  const prefix = match[1], step = parseInt(match[2]);
+  // Determine total steps per prefix
+  const totals = { auto: 4, hab: 3, vida: 3, saude: 3 };
+  const total = totals[prefix];
+  if (!total) return;
+  // Only allow navigating to already-visited steps (done or active)
+  _goStep(prefix, total, step);
+});
+
 function autoGoStep(n) {
   // ── Passo 1 → 2: Dados do Condutor ──
   if (n === 2) {
-    if (!document.getElementById('contacto-check-auto')?.checked) {
-      showToast('Por favor autorize o contacto antes de avançar', 'error'); return;
-    }
     if (!document.getElementById('termos-check-auto')?.checked) {
       showToast('Por favor aceite os Termos de Responsabilidade antes de avançar', 'error'); return;
     }
@@ -4046,9 +4048,6 @@ function autoGoStep(n) {
 function habGoStep(n) {
   // ── Passo 1 → 2: Dados Pessoais ──
   if (n === 2) {
-    if (!document.getElementById('contacto-check-hab')?.checked) {
-      showToast('Por favor autorize o contacto antes de avançar', 'error'); return;
-    }
     if (!document.getElementById('termos-check-hab')?.checked) {
       showToast('Por favor aceite os Termos de Responsabilidade antes de avançar', 'error'); return;
     }
@@ -4087,11 +4086,7 @@ function vidaGoStep(n) {
     if (!document.getElementById('termos-check-vida')?.checked) {
       showToast('Por favor aceite os Termos de Responsabilidade antes de avançar', 'error'); return;
     }
-    if (!document.getElementById('contacto-check-vida')?.checked) {
-      showToast('Por favor autorize o contacto antes de avançar', 'error'); return;
-    }
 
-    // ── Verificar que existe pelo menos 1 segurado ──
     const vidaTomadorCb = document.getElementById('v-tomador-cb');
     if (!vidaTomadorCb?.checked && vidaPessoas <= 1) {
       showToast('Tem de indicar pelo menos 1 pessoa segurada. Marque "Sou segurado" ou adicione uma 1ª Pessoa.', 'error'); return;
@@ -4161,9 +4156,6 @@ function vidaGoStep(n) {
 function saudeGoStep(n) {
   // ── Passo 1 → 2: Dados dos Segurados ──
   if (n === 2) {
-    if (!document.getElementById('contacto-check-saude')?.checked) {
-      showToast('Por favor autorize o contacto antes de avançar', 'error'); return;
-    }
     if (!document.getElementById('termos-check-saude')?.checked) {
       showToast('Por favor aceite os Termos de Responsabilidade antes de avançar', 'error'); return;
     }
@@ -4420,20 +4412,7 @@ function calcAuto(){
       summary:v('a-marca')+' '+v('a-modelo')+' · '+v('a-matr')+' · '+v('a-cob'),
       best:results.slice().sort((a,b)=>a.price-b.price)[0]});
     hideLoading();
-    // Banner de zona geográfica automóvel
-    const autoResEl=document.getElementById('results-auto');
-    if(autoResEl){
-      const oldBanner=autoResEl.querySelector('.auto-geo-banner');
-      if(oldBanner)oldBanner.remove();
-      const banner=document.createElement('div');
-      banner.className='auto-geo-banner';
-      banner.style.cssText='background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;gap:12px;align-items:flex-start';
-      const geoF=_getAutoGeoFactor(v('a-cp'));
-      const geoFStr=geoF>=1?('+'+((geoF-1)*100).toFixed(0)+'%'):(((geoF-1)*100).toFixed(0)+'%');
-      banner.innerHTML=`<span style="font-size:1.4rem;line-height:1">${AUTO_GEO_ICON[geoZone]||'📍'}</span><div><div style="font-size:.75rem;font-weight:700;color:var(--text);margin-bottom:3px">Zona: ${AUTO_GEO_LABELS[geoZone]||geoZone} <span style="font-weight:400;color:var(--muted);font-size:.7rem">· CP ${v('a-cp')} · Fator sinistralidade: ${geoFStr}</span></div><div style="font-size:.73rem;color:var(--muted);line-height:1.55">${AUTO_GEO_DESC[geoZone]||''}</div></div>`;
-      autoResEl.prepend(banner);
-    }
-    mostrarMensagemEmail('results-auto', nome, ramo_pt_label('auto'));
+    renderResults('results-auto', results, 'preco', nome, 'auto');
     _goStep('auto', 4, 4);
     document.getElementById('results-auto').scrollIntoView({behavior:'smooth',block:'start'});
   },50);
@@ -4476,101 +4455,80 @@ function calcHab(){
     enviarEmailSimulacao('habitacao', formSnapshot, results);
     addHistoryEntry({type:'habitacao',nome,date:new Date().toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon' }),summary:'Área: '+v('h-area')+' m² · '+v('h-tipo'),best:results.slice().sort((a,b)=>a.price-b.price)[0]});
     hideLoading();
-    // Banner de zona geográfica
-    const geoLabels={lisboa:'Lisboa e Área Metropolitana',porto:'Porto e Área Metropolitana',algarve:'Algarve',acores:'Açores',madeira:'Madeira',interior:'Interior'};
-    const geoDesc={lisboa:'Zona de maior sinistralidade: sismicidade elevada, densidade urbana e custo de reconstrução acima da média nacional.',porto:'Zona urbana de alta densidade com sinistralidade moderada-alta e custo de reconstrução elevado.',algarve:'Zona de risco de incêndio florestal elevado no verão e sismicidade moderada. Prémios acrescidos sazonalmente.',acores:'Zona de sismicidade e vulcanismo elevados — risco geotécnico mais alto do território nacional.',madeira:'Zona de risco de aluviões e incêndio com histórico de sinistralidade relevante.',interior:'Zona de baixa densidade e sinistralidade reduzida — prémios mais competitivos.'};
-    const geoIcon={lisboa:'🏙️',porto:'🏗️',algarve:'🌞',acores:'🌋',madeira:'⛰️',interior:'🌿'};
-    const geoInfoEl=document.getElementById('results-habitacao');
-    if(geoInfoEl){
-      const banner=document.createElement('div');
-      banner.style.cssText='background:var(--surface2);border:1.5px solid var(--border);border-radius:12px;padding:14px 18px;margin-bottom:16px;display:flex;gap:12px;align-items:flex-start';
-      banner.innerHTML=`<span style="font-size:1.4rem;line-height:1">${geoIcon[geoZone]||'📍'}</span><div><div style="font-size:.75rem;font-weight:700;color:var(--text);margin-bottom:3px">Zona: ${geoLabels[geoZone]||geoZone} <span style="font-weight:400;color:var(--muted);font-size:.7rem">· CP ${v('h-cp')}</span></div><div style="font-size:.73rem;color:var(--muted);line-height:1.55">${geoDesc[geoZone]||''}</div></div>`;
-      geoInfoEl.prepend(banner);
-    }
+    // ── Construir HTML extra (banner geo + tabelas MRC/MRE) como string ──
+    let habExtra = '';
 
     // ── RESULTADOS ESPECÍFICOS MRC (Condomínio) ──
     if (habMultiTipo === 'condominio') {
       const numFracoes = parseInt(v('h-num-fracoes')) || 8;
       const valPartes  = parseFloat(v('h-valor-partes-comuns')) || (parseFloat(v('h-area'))||80)*400;
       const numElev    = parseInt(v('h-num-elevadores')) || 0;
-      const mrcEl = document.getElementById('results-habitacao');
-      if (mrcEl) {
-        const rows = COMPANIES.map(c => {
-          const geoMult    = (HAB_GEO_MULT[c.id]||{})[geoZone]||1.0;
-          const premBase   = +(base * c.mult.hab * geoMult).toFixed(2);
-          const premPartes = +((valPartes / 100000) * 1.40 * c.mult.hab * geoMult).toFixed(2);
-          const premElev   = +(numElev * 18 * c.mult.hab).toFixed(2);
-          const premTotal  = +(premBase + premPartes + premElev).toFixed(2);
-          return `<tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:10px 12px"><div style="width:32px;height:32px;border-radius:8px;background:${c.bg};color:${c.color};display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700">${c.abbr}</div></td>
-            <td style="padding:10px 12px;font-weight:700;color:var(--text);font-size:.85rem">${c.name}</td>
-            <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${premBase.toFixed(2)} €</td>
-            <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${premPartes.toFixed(2)} €</td>
-            <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${numElev > 0 ? premElev.toFixed(2)+' €' : '—'}</td>
-            <td style="padding:10px 12px;font-weight:800;color:${c.color};font-size:.9rem">${premTotal.toFixed(2)} €<div style="font-size:.63rem;color:var(--muted);font-weight:400">/ mês</div></td>
-          </tr>`;
-        }).join('');
-        const tabelaMRC = document.createElement('div');
-        tabelaMRC.innerHTML = `
-          <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)">
-            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:10px">Prémio MRC — Multirriscos Condomínio</div>
-            <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px">${numFracoes} frações · ${parseFloat(v('h-area'))||0} m² áreas comuns · ${numElev} elevador(es) · Partes comuns: ${valPartes.toLocaleString('pt-PT')} €</div>
-            <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-family:inherit">
-              <thead><tr style="background:var(--surface2);border-bottom:2px solid var(--border)">
-                <th style="padding:8px 12px;width:44px"></th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Seguradora</th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Estrutura</th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Partes Comuns</th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Elevadores</th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Total / mês</th>
-              </tr></thead>
-              <tbody>${rows}</tbody>
-            </table></div>
-          </div>`;
-        mrcEl.prepend(tabelaMRC.firstElementChild);
-      }
+      const rows = COMPANIES.map(c => {
+        const geoMult    = (HAB_GEO_MULT[c.id]||{})[geoZone]||1.0;
+        const premBase   = +(base * c.mult.hab * geoMult).toFixed(2);
+        const premPartes = +((valPartes / 100000) * 1.40 * c.mult.hab * geoMult).toFixed(2);
+        const premElev   = +(numElev * 18 * c.mult.hab).toFixed(2);
+        const premTotal  = +(premBase + premPartes + premElev).toFixed(2);
+        return `<tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:10px 12px"><div style="width:32px;height:32px;border-radius:8px;background:${c.bg};color:${c.color};display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700">${c.abbr}</div></td>
+          <td style="padding:10px 12px;font-weight:700;color:var(--text);font-size:.85rem">${c.name}</td>
+          <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${premBase.toFixed(2)} €</td>
+          <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${premPartes.toFixed(2)} €</td>
+          <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${numElev > 0 ? premElev.toFixed(2)+' €' : '—'}</td>
+          <td style="padding:10px 12px;font-weight:800;color:${c.color};font-size:.9rem">${premTotal.toFixed(2)} €<div style="font-size:.63rem;color:var(--muted);font-weight:400">/ mês</div></td>
+        </tr>`;
+      }).join('');
+      habExtra += `<div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:10px">Prémio MRC — Multirriscos Condomínio</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px">${numFracoes} frações · ${parseFloat(v('h-area'))||0} m² áreas comuns · ${numElev} elevador(es) · Partes comuns: ${valPartes.toLocaleString('pt-PT')} €</div>
+        <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-family:inherit">
+          <thead><tr style="background:var(--surface2);border-bottom:2px solid var(--border)">
+            <th style="padding:8px 12px;width:44px"></th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Seguradora</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Estrutura</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Partes Comuns</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Elevadores</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Total / mês</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+      </div>`;
     }
 
     // ── RESULTADOS ESPECÍFICOS MRE (Empresa / Industrial) ──
     if (habMultiTipo === 'empresa') {
       const capImovel  = parseFloat(v('h-capital-imovel'))  || (parseFloat(v('h-area'))||100)*650;
       const capRecheio = parseFloat(v('h-capital-recheio')) || 50000;
-      const mreEl = document.getElementById('results-habitacao');
-      if (mreEl) {
-        const rows = COMPANIES.map(c => {
-          const geoMult    = (HAB_GEO_MULT[c.id]||{})[geoZone]||1.0;
-          const premImovel  = +((capImovel  / 100000) * 1.65 * c.mult.hab * geoMult).toFixed(2);
-          const premRecheio = +((capRecheio / 100000) * 2.20 * c.mult.hab * geoMult).toFixed(2);
-          const premTotal   = +(premImovel + premRecheio).toFixed(2);
-          return `<tr style="border-bottom:1px solid var(--border)">
-            <td style="padding:10px 12px"><div style="width:32px;height:32px;border-radius:8px;background:${c.bg};color:${c.color};display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700">${c.abbr}</div></td>
-            <td style="padding:10px 12px;font-weight:700;color:var(--text);font-size:.85rem">${c.name}</td>
-            <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${premImovel.toFixed(2)} €<div style="font-size:.6rem;color:var(--muted)">cap.: ${capImovel.toLocaleString('pt-PT')} €</div></td>
-            <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${premRecheio.toFixed(2)} €<div style="font-size:.6rem;color:var(--muted)">cap.: ${capRecheio.toLocaleString('pt-PT')} €</div></td>
-            <td style="padding:10px 12px;font-weight:800;color:${c.color};font-size:.9rem">${premTotal.toFixed(2)} €<div style="font-size:.63rem;color:var(--muted);font-weight:400">/ mês</div></td>
-          </tr>`;
-        }).join('');
-        const tabelaMRE = document.createElement('div');
-        tabelaMRE.innerHTML = `
-          <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)">
-            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:10px">Prémio MRE — Multirriscos Empresa: Imóvel + Recheio</div>
-            <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px">${parseFloat(v('h-area'))||0} m² · Imóvel: ${capImovel.toLocaleString('pt-PT')} € · Recheio: ${capRecheio.toLocaleString('pt-PT')} €</div>
-            <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-family:inherit">
-              <thead><tr style="background:var(--surface2);border-bottom:2px solid var(--border)">
-                <th style="padding:8px 12px;width:44px"></th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Seguradora</th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Prémio Imóvel / mês</th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Prémio Recheio / mês</th>
-                <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Total / mês</th>
-              </tr></thead>
-              <tbody>${rows}</tbody>
-            </table></div>
-          </div>`;
-        mreEl.prepend(tabelaMRE.firstElementChild);
-      }
+      const rows = COMPANIES.map(c => {
+        const geoMult    = (HAB_GEO_MULT[c.id]||{})[geoZone]||1.0;
+        const premImovel  = +((capImovel  / 100000) * 1.65 * c.mult.hab * geoMult).toFixed(2);
+        const premRecheio = +((capRecheio / 100000) * 2.20 * c.mult.hab * geoMult).toFixed(2);
+        const premTotal   = +(premImovel + premRecheio).toFixed(2);
+        return `<tr style="border-bottom:1px solid var(--border)">
+          <td style="padding:10px 12px"><div style="width:32px;height:32px;border-radius:8px;background:${c.bg};color:${c.color};display:inline-flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700">${c.abbr}</div></td>
+          <td style="padding:10px 12px;font-weight:700;color:var(--text);font-size:.85rem">${c.name}</td>
+          <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${premImovel.toFixed(2)} €<div style="font-size:.6rem;color:var(--muted)">cap.: ${capImovel.toLocaleString('pt-PT')} €</div></td>
+          <td style="padding:10px 12px;font-size:.78rem;color:var(--text2)">${premRecheio.toFixed(2)} €<div style="font-size:.6rem;color:var(--muted)">cap.: ${capRecheio.toLocaleString('pt-PT')} €</div></td>
+          <td style="padding:10px 12px;font-weight:800;color:${c.color};font-size:.9rem">${premTotal.toFixed(2)} €<div style="font-size:.63rem;color:var(--muted);font-weight:400">/ mês</div></td>
+        </tr>`;
+      }).join('');
+      habExtra += `<div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:10px">Prémio MRE — Multirriscos Empresa: Imóvel + Recheio</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px">${parseFloat(v('h-area'))||0} m² · Imóvel: ${capImovel.toLocaleString('pt-PT')} € · Recheio: ${capRecheio.toLocaleString('pt-PT')} €</div>
+        <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-family:inherit">
+          <thead><tr style="background:var(--surface2);border-bottom:2px solid var(--border)">
+            <th style="padding:8px 12px;width:44px"></th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Seguradora</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Prémio Imóvel / mês</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Prémio Recheio / mês</th>
+            <th style="padding:8px 12px;text-align:left;font-size:.63rem;font-weight:700;text-transform:uppercase;color:var(--text2)">Total / mês</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+      </div>`;
     }
 
-    mostrarMensagemEmail('results-habitacao', nome, ramo_pt_label('habitacao'));
+    renderResults('results-habitacao', results, 'preco', nome, 'habitacao', habExtra);
     _goStep('hab', 3, 3);
     document.getElementById('results-habitacao').scrollIntoView({behavior:'smooth',block:'start'});
   },50);
@@ -4634,13 +4592,13 @@ function calcVida(){
     addHistoryEntry({type:'vida',nome,date:new Date().toLocaleString('pt-PT', { timeZone: 'Europe/Lisbon' }),summary:'Capital: '+v('v-capital')+' € · '+meses+' meses',best:results.slice().sort((a,b)=>a.price-b.price)[0]});
     hideLoading();
 
+    let vidaExtra = '';
     // ── PROJEÇÃO VIDA CRÉDITO — Tranquilidade vs Allianz ──
     if (vidaTipo === 'credito') {
       const prazoAnos = parseInt(v('v-prazo')) || 25;
       const taxaNom   = parseFloat(v('v-taxa')) || 0.10;
       const capInicial = parseFloat(v('v-capital')) || 100000;
       const anoBase = new Date().getFullYear();
-      // Gerar projeção anual do capital em dívida (amortização linear simplificada)
       const anosProj = [];
       for (let a = 0; a <= Math.min(prazoAnos, 5); a++) {
         const capRestante = capInicial * (1 - a / prazoAnos);
@@ -4657,9 +4615,7 @@ function calcVida(){
           zurich:  (premBase * COMPANIES.find(c=>c.id==='zurich').mult.vida).toFixed(2),
         });
       }
-      const projEl = document.getElementById('results-vida');
-      if (projEl) {
-        const rows = anosProj.map(p => `
+      const rows = anosProj.map(p => `
           <tr style="border-bottom:1px solid var(--border)">
             <td style="padding:10px 12px;font-weight:700;color:var(--text);font-size:.82rem">${p.ano}</td>
             <td style="padding:10px 12px;font-size:.78rem;color:var(--muted)">${parseInt(p.capital).toLocaleString('pt-PT')} €</td>
@@ -4668,31 +4624,29 @@ function calcVida(){
             <td style="padding:10px 12px;font-weight:700;color:#28c278;font-size:.85rem">${p.una} €<div style="font-size:.64rem;color:var(--muted);font-weight:400">/ mês</div></td>
             <td style="padding:10px 12px;font-weight:700;color:#d4a820;font-size:.85rem">${p.zurich} €<div style="font-size:.64rem;color:var(--muted);font-weight:400">/ mês</div></td>
           </tr>`).join('');
-        projEl.innerHTML = `
-          <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)">
-            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:14px">Projeção de Prémio — Vida Crédito ${anoBase}–${anoBase+Math.min(prazoAnos,5)}</div>
-            <div style="font-size:.78rem;color:var(--muted);margin-bottom:16px;line-height:1.5">Capital inicial: <strong>${capInicial.toLocaleString('pt-PT')} €</strong> · Prazo: <strong>${prazoAnos} anos</strong> · Taxa: <strong>${taxaNom}%</strong><br>Prémios mensais estimados por seguradora, com amortização linear do capital em dívida.</div>
-            <div style="overflow-x:auto">
-              <table style="width:100%;border-collapse:collapse;font-family:inherit">
-                <thead>
-                  <tr style="background:var(--surface2);border-bottom:2px solid var(--border)">
-                    <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2)">Ano</th>
-                    <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2)">Capital Devedor</th>
-                    <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#4f8ef7">Tranquilidade</th>
-                    <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#e05070">Allianz</th>
-                    <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#28c278">Una</th>
-                    <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#d4a820">Zurich</th>
-                  </tr>
-                </thead>
-                <tbody>${rows}</tbody>
-              </table>
-            </div>
-            <div style="margin-top:12px;font-size:.68rem;color:var(--muted);font-style:italic">* Valores estimados. Prémio real pode variar com reavaliações médicas anuais e condições da apólice.</div>
-          </div>`;
-      }
+      vidaExtra = `<div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:22px;margin-bottom:18px;box-shadow:var(--shadow)">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:14px">Projeção de Prémio — Vida Crédito ${anoBase}–${anoBase+Math.min(prazoAnos,5)}</div>
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:16px;line-height:1.5">Capital inicial: <strong>${capInicial.toLocaleString('pt-PT')} €</strong> · Prazo: <strong>${prazoAnos} anos</strong> · Taxa: <strong>${taxaNom}%</strong><br>Prémios mensais estimados por seguradora, com amortização linear do capital em dívida.</div>
+        <div style="overflow-x:auto">
+          <table style="width:100%;border-collapse:collapse;font-family:inherit">
+            <thead>
+              <tr style="background:var(--surface2);border-bottom:2px solid var(--border)">
+                <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2)">Ano</th>
+                <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--text2)">Capital Devedor</th>
+                <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#4f8ef7">Tranquilidade</th>
+                <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#e05070">Allianz</th>
+                <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#28c278">Una</th>
+                <th style="padding:8px 12px;text-align:left;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#d4a820">Zurich</th>
+              </tr>
+            </thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+        <div style="margin-top:12px;font-size:.68rem;color:var(--muted);font-style:italic">* Valores estimados. Prémio real pode variar com reavaliações médicas anuais e condições da apólice.</div>
+      </div>`;
     }
 
-    mostrarMensagemEmail('results-vida', nome, ramo_pt_label('vida'));
+    renderResults('results-vida', results, 'preco', nome, 'vida', vidaExtra);
     _goStep('vida', 3, 3);
     document.getElementById('results-vida').scrollIntoView({behavior:'smooth',block:'start'});
   },50);
@@ -4749,63 +4703,60 @@ function calcSaude(){
     hideLoading();
 
     // ── RESULTADOS ESPECÍFICOS SAÚDE EMPRESAS — faixas etárias ──
+    let saudeExtra = '';
     if (plano === 'empresas') {
       const numTrab = parseInt(v('s-num-trabalhadores')) || 10;
       const faixaEt = v('s-faixa-etaria') || 'misto';
-      // Distribuição de idades por faixa (simplificado)
       const distFaixas = {
         jovem:  [{label:'18–25', pct:0.35, idRef:22}, {label:'26–35', pct:0.65, idRef:30}],
         misto:  [{label:'18–30', pct:0.25, idRef:24}, {label:'31–45', pct:0.50, idRef:37}, {label:'46–55', pct:0.25, idRef:50}],
         senior: [{label:'40–50', pct:0.40, idRef:45}, {label:'51–60', pct:0.40, idRef:55}, {label:'61–65', pct:0.20, idRef:63}],
       };
       const faixas = distFaixas[faixaEt] || distFaixas.misto;
-      const saudeEmpEl = document.getElementById('results-saude');
-      if (saudeEmpEl) {
-        const rows = COMPANIES.map(c => {
-          const faixaRows = faixas.map(f => {
-            const nF = Math.round(numTrab * f.pct);
-            const premIndiv = +(calcSaudeBase([f.idRef.toString()], 'intermedio', false) * c.mult.saude).toFixed(2);
-            const premGrupo = +(premIndiv * nF * 0.85).toFixed(2); // 15% desconto grupo
-            return `<tr style="background:var(--surface3)">
-              <td style="padding:6px 10px;font-size:.73rem;color:var(--text2)">${f.label} anos</td>
-              <td style="padding:6px 10px;font-size:.73rem;color:var(--text2)">${nF} trabalhadores</td>
-              <td style="padding:6px 10px;font-size:.73rem;color:var(--text2)">${premIndiv.toFixed(2)} €</td>
-              <td style="padding:6px 10px;font-size:.73rem;font-weight:700;color:var(--text)">${premGrupo.toFixed(2)} €</td>
-            </tr>`;
-          }).join('');
-          const premTotal = faixas.reduce((s, f) => {
-            const nF = Math.round(numTrab * f.pct);
-            return s + calcSaudeBase([f.idRef.toString()], 'intermedio', false) * c.mult.saude * nF * 0.85;
-          }, 0);
-          return `<div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow)">
-            <div style="background:var(--surface2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)">
-              <div style="display:flex;align-items:center;gap:10px">
-                <div style="width:34px;height:34px;border-radius:8px;background:${c.bg};color:${c.color};display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700">${c.abbr}</div>
-                <div><div style="font-weight:700;font-size:.9rem;color:var(--text)">${c.name}</div><div style="font-size:.68rem;color:var(--muted)">${c.tag}</div></div>
-              </div>
-              <div style="text-align:right"><div style="font-size:1.3rem;font-weight:800;color:${c.color}">${premTotal.toFixed(2)} €</div><div style="font-size:.65rem;color:var(--muted)">total / mês · ${numTrab} trabalhadores</div></div>
-            </div>
-            <table style="width:100%;border-collapse:collapse;font-family:inherit">
-              <thead><tr style="border-bottom:1px solid var(--border)">
-                <th style="padding:7px 10px;text-align:left;font-size:.61rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Faixa Etária</th>
-                <th style="padding:7px 10px;text-align:left;font-size:.61rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Nº Trabalhadores</th>
-                <th style="padding:7px 10px;text-align:left;font-size:.61rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Prémio Individual</th>
-                <th style="padding:7px 10px;text-align:left;font-size:.61rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Subtotal (−15% grupo)</th>
-              </tr></thead>
-              <tbody>${faixaRows}</tbody>
-            </table>
-          </div>`;
+      const rows = COMPANIES.map(c => {
+        const faixaRows = faixas.map(f => {
+          const nF = Math.round(numTrab * f.pct);
+          const premIndiv = +(calcSaudeBase([f.idRef.toString()], 'intermedio', false) * c.mult.saude).toFixed(2);
+          const premGrupo = +(premIndiv * nF * 0.85).toFixed(2);
+          return `<tr style="background:var(--surface3)">
+            <td style="padding:6px 10px;font-size:.73rem;color:var(--text2)">${f.label} anos</td>
+            <td style="padding:6px 10px;font-size:.73rem;color:var(--text2)">${nF} trabalhadores</td>
+            <td style="padding:6px 10px;font-size:.73rem;color:var(--text2)">${premIndiv.toFixed(2)} €</td>
+            <td style="padding:6px 10px;font-size:.73rem;font-weight:700;color:var(--text)">${premGrupo.toFixed(2)} €</td>
+          </tr>`;
         }).join('');
-        saudeEmpEl.innerHTML = `
-          <div style="margin-bottom:18px">
-            <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:10px">Saúde Empresas — Faixas Etárias · ${numTrab} trabalhadores · ${faixaEt === 'jovem' ? 'Jovens' : faixaEt === 'senior' ? 'Sénior' : 'Mista'}</div>
-            <div style="font-size:.73rem;color:var(--muted);margin-bottom:16px">Desconto de 15% aplicado para seguro coletivo. Plano Intermédio como referência.</div>
-            ${rows}
-          </div>`;
-      }
+        const premTotal = faixas.reduce((s, f) => {
+          const nF = Math.round(numTrab * f.pct);
+          return s + calcSaudeBase([f.idRef.toString()], 'intermedio', false) * c.mult.saude * nF * 0.85;
+        }, 0);
+        return `<div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow)">
+          <div style="background:var(--surface2);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)">
+            <div style="display:flex;align-items:center;gap:10px">
+              <div style="width:34px;height:34px;border-radius:8px;background:${c.bg};color:${c.color};display:flex;align-items:center;justify-content:center;font-size:.65rem;font-weight:700">${c.abbr}</div>
+              <div><div style="font-weight:700;font-size:.9rem;color:var(--text)">${c.name}</div><div style="font-size:.68rem;color:var(--muted)">${c.tag}</div></div>
+            </div>
+            <div style="text-align:right"><div style="font-size:1.3rem;font-weight:800;color:${c.color}">${premTotal.toFixed(2)} €</div><div style="font-size:.65rem;color:var(--muted)">total / mês · ${numTrab} trabalhadores</div></div>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-family:inherit">
+            <thead><tr style="border-bottom:1px solid var(--border)">
+              <th style="padding:7px 10px;text-align:left;font-size:.61rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Faixa Etária</th>
+              <th style="padding:7px 10px;text-align:left;font-size:.61rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Nº Trabalhadores</th>
+              <th style="padding:7px 10px;text-align:left;font-size:.61rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Prémio Individual</th>
+              <th style="padding:7px 10px;text-align:left;font-size:.61rem;font-weight:700;text-transform:uppercase;color:var(--muted)">Subtotal (−15% grupo)</th>
+            </tr></thead>
+            <tbody>${faixaRows}</tbody>
+          </table>
+        </div>`;
+      }).join('');
+      saudeExtra = `<div style="margin-bottom:18px">
+        <div style="font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:10px">Saúde Empresas — Faixas Etárias · ${numTrab} trabalhadores · ${faixaEt === 'jovem' ? 'Jovens' : faixaEt === 'senior' ? 'Sénior' : 'Mista'}</div>
+        <div style="font-size:.73rem;color:var(--muted);margin-bottom:16px">Desconto de 15% aplicado para seguro coletivo. Plano Intermédio como referência.</div>
+        ${rows}
+      </div>`;
     }
 
-    mostrarMensagemEmail('results-saude', _nome0s?.value||'Cliente', ramo_pt_label('saude'));
+    const _nomeSaude = _nome0s?.value||'Cliente';
+    renderResults('results-saude', results, 'preco', _nomeSaude, 'saude', saudeExtra);
     _goStep('saude', 3, 3);
     document.getElementById('results-saude').scrollIntoView({behavior:'smooth',block:'start'});
   },50);
@@ -6588,7 +6539,7 @@ async function enviarEmailSimulacao(ramo, formSnapshot, results) {
     });
 
     if (resp.ok) {
-      showToast('Simulação enviada para o seu email!', 'success');
+      showToast('✓ Simulação concluída com sucesso!', 'success');
     } else {
       console.warn('Servidor retornou erro:', resp.status);
     }
